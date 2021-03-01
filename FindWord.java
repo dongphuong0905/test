@@ -17,6 +17,7 @@ public class FindWord {
         boolean[][] visited = new boolean[m][n];
 
         //2 arrays of move step
+        //up, down, left, right
         int[] rowMove = {-1,+1,0,0};
         int[] colMove = {0,0,-1,+1};
 
