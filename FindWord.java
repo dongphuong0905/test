@@ -6,14 +6,16 @@ import java.util.Scanner;
 public class FindWord {
 
     public static boolean move(String[][] input, String word, int i, int j){
-        
+
+        //get length of input
         int m = input.length;
         int n = input[0].length;
+        //get length of word
         int wordLen = word.length();
-        
+
         //create visit status of moving
         boolean[][] visited = new boolean[m][n];
-        
+
         //2 arrays of move step
         int[] rowMove = {-1,+1,0,0};
         int[] colMove = {0,0,-1,+1};
@@ -62,16 +64,18 @@ public class FindWord {
                             i = nextRow;
                             j = nextCol;
                             check = false;
-
                         }
                     }
 
-                    //if go wrong way, return back old postion
-                    //to find another way
+                    //if move all way but can't find the same
+                    //return back old postion to find another way
                     if(p == 3 && check && count >=2){
+                        //get old position
                         i = rowHistory[count - 1];
                         j = colHistory[count - 1];
+                        //decrease count
                         count--;
+                        //decrease index of word
                         k = k - 2;
                     }
 
@@ -79,6 +83,7 @@ public class FindWord {
             }
         }
 
+        //check count to return result
         if(count == word.length()){
             return true;
         }else {
@@ -100,18 +105,19 @@ public class FindWord {
                     System.out.println("True");
                     break;
                 }
-
             }
         }
     }
 
     public static void main(String[] args) {
+        //enter m, n
         Scanner keyboard = new Scanner(System.in);
         System.out.println("Enter m:");
         int m = keyboard.nextInt();
         System.out.println("Enter n:");
         int n = keyboard.nextInt();
 
+        //random input
         String[][] input = new String[m][n];
         Random rnd = new Random();
         for(int i = 0; i < m; i++){
@@ -121,6 +127,7 @@ public class FindWord {
             }
         }
 
+        //print input
         System.out.println("Random input");
         for(int i = 0; i < m; i++){
             for(int j = 0; j < n; j++){
@@ -128,16 +135,22 @@ public class FindWord {
             }
             System.out.println();
         }
+        
         String word = "";
         String c = "";
+        
+        //loop for enter word
         do{
             String b = keyboard.nextLine();
             System.out.print("Enter the word: ");
             word = keyboard.nextLine();
+            
+            //call method to find word
             find(input, word);
 
             System.out.println("Continute? (Y/N)");
             c = keyboard.nextLine();
         }while (c.equals("Y"));
+
     }
 }
